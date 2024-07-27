@@ -8,7 +8,7 @@ function limpiarCaja(){
 
 function validarTexto(texto) {
     //Definimos una expresión regular que verifica que solo haya letras minúsculas sin acentos y sin caracteres especiales
-    const expresionRegular = /^[a-z\s]+$/;
+    const expresionRegular = /^[a-z\s!?¡¿,ñ.:]+$/;
     return expresionRegular.test(texto);
 }
 
@@ -33,41 +33,57 @@ function mostrarAdvertencia(){
 
 function encriptarTexto() {
     let textoUsuario = document.getElementById('userText').value;
-    if(validarTexto(textoUsuario)){
-        let textoEncriptado = textoUsuario.replace(/e/g, 'enter')
-                    .replace(/i/g, 'imes')
-                    .replace(/a/g, 'ai')
-                    .replace(/o/g, 'ober')
-                    .replace(/u/g, 'ufat');
-        texto = textoEncriptado;
-        asignarTextoElemento('h1', textoEncriptado);
-        ocultarAdvertencia();
-        mostrarBoton();
+    if(textoUsuario === null || textoUsuario === undefined || textoUsuario.trim() === ''){
+        asignarTextoElemento('h1','');
+        mostrarAdvertencia();
+        ocultarBoton();
     }
     else{
-        asignarTextoElemento('h1','Texto no válido');
-        ocultarBoton();
-        return;
+        if(validarTexto(textoUsuario)){
+            let textoEncriptado = textoUsuario.replace(/e/g, 'enter')
+                        .replace(/i/g, 'imes')
+                        .replace(/a/g, 'ai')
+                        .replace(/o/g, 'ober')
+                        .replace(/u/g, 'ufat');
+            texto = textoEncriptado;
+            asignarTextoElemento('h1', textoEncriptado);
+            ocultarAdvertencia();
+            mostrarBoton();
+        }
+        else{
+            asignarTextoElemento('h1','Texto no válido');
+            mostrarAdvertencia();
+            ocultarBoton();
+            return;
+        }
     }
 }
 
 function desencriptarTexto() {
     let textoEncriptado = document.getElementById('userText').value;
-    if(validarTexto(textoEncriptado)){
-    let textoDesencriptado = textoEncriptado.replace(/enter/g, 'e')
-                .replace(/imes/g, 'i')
-                .replace(/ai/g, 'a')
-                .replace(/ober/g, 'o')
-                .replace(/ufat/g, 'u');
-        texto = textoDesencriptado;
-        asignarTextoElemento('h1', textoDesencriptado);
-        ocultarAdvertencia();
-        mostrarBoton();
+    if(textoEncriptado === null || textoEncriptado === undefined || textoEncriptado.trim() === ''){
+        asignarTextoElemento('h1','');
+        mostrarAdvertencia();
+        ocultarBoton();
     }
     else{
-        asignarTextoElemento('h1','Texto no válido');
-        ocultarBoton();
-        return;
+        if(validarTexto(textoEncriptado)){
+            let textoDesencriptado = textoEncriptado.replace(/enter/g, 'e')
+                        .replace(/imes/g, 'i')
+                        .replace(/ai/g, 'a')
+                        .replace(/ober/g, 'o')
+                        .replace(/ufat/g, 'u');
+                texto = textoDesencriptado;
+                asignarTextoElemento('h1', textoDesencriptado);
+                ocultarAdvertencia();
+                mostrarBoton();
+            }
+            else{
+                asignarTextoElemento('h1','Texto no válido');
+                mostrarAdvertencia();
+                ocultarBoton();
+                return;
+            }
     }
 }
 
@@ -94,10 +110,6 @@ document.addEventListener('input', function (event) {
     autoExpand(event.target);
 }, false);
 
-/* document.addEventListener('input', function (event) {
-    if (event.target.tagName.toLowerCase() !== 'h1') return;
-    autoExpand(event.target);
-}, false); */
 
 function autoExpand(field) {
     // Restablecer la altura del textarea
