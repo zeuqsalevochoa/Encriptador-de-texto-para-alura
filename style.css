@@ -226,7 +226,7 @@ body{
 }
 
 /* Media Queries */
-@media (max-width: 768px) and (min-width: 376px) {
+@media (max-width: 768px) and (min-width: 426px) {
     .header__text {
         font-size: 1.5rem;
     }
@@ -264,7 +264,7 @@ body{
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 425px) {
     .header__text {
         font-size: 1.5rem;
     }
