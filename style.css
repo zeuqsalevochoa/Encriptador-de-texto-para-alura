@@ -180,6 +180,9 @@ body{
     color: var(--color-texto-salida);
     text-align: start;
     padding: 5% 2% 2% 2%;
+    word-break: break-word; /* Para romper palabras largas */
+    overflow-wrap: break-word; /* Para asegurar que las palabras se ajusten */
+    white-space: pre-wrap; /* Para preservar los saltos de línea */
 }
 .text__one{
     font-family: var(--fuente-inter);
